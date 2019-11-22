@@ -1,41 +1,67 @@
 <%- include('../includes/head.ejs'); %>
-    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/movie.css">
     </head>
-
     <body>
         <%- include('../includes/navigation.ejs'); %>
-            <main>
-                <% if(movies.length > 0 ){ %>
-                    <h1>My Movies</h1>
-                    <p>List of all the movies...</p>
-                    <div class="grid">
-                        <% for(let movie of movies){ %>
-                            <article class="card movie-item">
-                                <header class="card__header">
-                                    <h1 class="movie__title">
-                                        <%= movie.name %>
-                                    </h1>
-                                </header>
-                                
-                                <div class="card__content">
-                                    <h2 class="movie__price">Rating
-                                        <%= movie.rating %>
-                                    </h2>
-                                    <p class="movie__description">
-                                        <ul>
-                                        <% let genres= movie.genres;for(let genre of genres){ %>
-                                            <li>  <%= genre %></li>
-                                        <% } %>
-                                        </ul>
-                                    </p>
-                                </div>
-                                
-                            </article>
-                            <% } %>
+            
+<div class="container">
+    <br/>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+            <form class="card card-sm" action="/" method="GET">
+                <div class="card-body row no-gutters align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-search h4 text-body"></i>
                     </div>
-                    <% }else{ %>
-                        <h1>No movie found.</h1>
-                        <% } %>
-            </main>
-            <%- include('../includes/end.ejs'); %>
+                    <!--end of col-->
+                    <div class="col">
+                        <input class="form-control form-control-md form-control-borderless" type="search" name="genre"  placeholder="Enter Genre" required>
+                    </div>
+                    <div class="col">
+                    <input class="form-control form-control-md form-control-borderless" type="search" name="time" placeholder="Enter Time" required>
+                    </div>
+                    <!--end of col-->
+                    <div class="col-auto">
+                        <button class="btn btn-md btn-success" type="submit">Search</button>
+                    </div>
+                    <!--end of col-->
+                </div>
+            </form>
+        </div>
+        <!--end of col-->
+    </div>
+</div>
+<main>
+
+    <% if(movies.length > 0 ){ %>
+        <div class="grid">
+            
+            <% for(let movie of movies){ %>
+                <article class="card movie-item">
+                    <header class="card__header">
+                        <h1 class="movie__title">
+                            <%= movie.name %>
+                        </h1>
+                    </header>
+                    
+                    <div class="card__content">
+                        <h2 class="movie__price">Rating
+                            <%= movie.rating %>
+                        </h2>
+                        <p class="movie__description">
+                            <ul>
+                            <% let genres= movie.genres;for(let genre of genres){ %>
+                                <li>  <%= genre %></li>
+                            <% } %>
+                            </ul>
+                        </p>
+                    </div>
+                    
+                </article>
+                <% } %>
+        </div>
+        <% }else{ %>
+            <h1>No movie found.</h1>
+            <% } %>
+</main>
+<%- include('../includes/end.ejs'); %>
